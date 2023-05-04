@@ -18,7 +18,7 @@ from flask import Flask, jsonify
 # deleteProductById(5)
 
 # updateProduct(3,'Jora2', "1just a regular product to improve uyour lfe",400,2)
-print(getProductById(3))
+print(getProductList())
 app=Flask(__name__)
 
 # @app.route('/productList',methods=['GET'])
