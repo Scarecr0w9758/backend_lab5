@@ -1,49 +1,33 @@
-from sqlalchemy import create_engine,ForeignKey, Column, String, Integer,CHAR,DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-import pymysql
+from sqlalchemy import create_engine
+from sqlalchemy import  Column, Integer, VARCHAR, String, DateTime
+from sqlalchemy.orm import DeclarativeBase,sessionmaker
 import sys
 sys.path.append('..')
 import dbconfig
-# host,user,password,db_name
-Base = declarative_base()
-
+import datetime
+# строка подключения
+engine_name = f"mysql+pymysql://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}/{dbconfig.db_name}"
+# создаем движок SqlAlchemy
+engine = create_engine(engine_name)
+#создаем базовый класс для моделей
+class Base(DeclarativeBase): pass
+  
+# создаем модель, объекты которой будут храниться в бд
 class Product(Base):
-    __tablename__="Products"
-    ID=Column("Id",Integer,primary_key=True)
-    NAME=Column('Name', String)    
-    DESCRIPTION=Column('Description', String)
-    PRICE=Column('Price', String)
-    CATEGORY_ID=Column('Category_Id', String)
-    MODIFIED=Column('Modified', Integer)
-    CREATED=Column('Created', Integer)
-
-    def __init__(self,ID, NAME, DESCRIPTION,PRICE,CATEGORY_ID,MODIFIED,CREATED):
-        self.ID=ID
-        self.NAME=NAME
-        self.DESCRIPTION=DESCRIPTION
-        self.PRICE=PRICE
-        self.CATEGORY_ID=CATEGORY_ID
-        self.MODIFIED=MODIFIED
-        self.CREATED=CREATED
-
-    def __repr__(self):
-        return f"({self.NAME} {self.DESCRIPTION} {self.PRICE} {self.CATEGORY_ID} {self.MODIFIED} {self.CREATED})"
-
-# Подключение к серверу MySQL на localhost с помощью PyMySQL DBAPI. 
-# Формат подключения: dialect+driver://username:password@host:port/database
-engine = create_engine(f"mysql+pymysql://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}/{dbconfig.db_name}")
-# engine = create_engine("sqlite://mydb.db", echo=True)
-
+    __tablename__ = "Products"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    description = Column(String)
+    price = Column(Integer)
+    category_id = Column(Integer)
+  
 Base.metadata.create_all(bind=engine)
+# with Session(autoflush=True, bind=engine) as db:
+#     bread=Product(name="bread",description="empty desc", price=50,category_id=14)
+#     db.add(bread)
+#     db.commit()
+#     print(bread.id)
 
-Session = sessionmaker(bind=engine)
-session = Session()
-
-product=Product("Ma","tvey",300,1,1,1)
-session.add(product)
-session.commit()
-
-p1=Product("Mu","te",400,0,0,0)
-session.add(p1)
-session.commit()
+# создаем таблицы
+ 
+print("База данных и таблица созданы")
