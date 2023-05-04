@@ -12,15 +12,15 @@ class Product(Base):
     __tablename__="Products"
     ID=Column("Id",Integer,primary_key=True)
     NAME=Column('Name', String)    
-    DESCRIPTION=Column('Description', String)    
-    PRICE=Column('Price', String)    
-    CATEGORY_ID=Column('Category_Id', String)    
-    MODIFIED=Column('Modified', Integer)    
-    CREATED=Column('Created', Integer)    
+    DESCRIPTION=Column('Description', String)
+    PRICE=Column('Price', String)
+    CATEGORY_ID=Column('Category_Id', String)
+    MODIFIED=Column('Modified', Integer)
+    CREATED=Column('Created', Integer)
 
     def __init__(self,ID, NAME, DESCRIPTION,PRICE,CATEGORY_ID,MODIFIED,CREATED):
         self.ID=ID
-        self.NAME=NAME    
+        self.NAME=NAME
         self.DESCRIPTION=DESCRIPTION
         self.PRICE=PRICE
         self.CATEGORY_ID=CATEGORY_ID
