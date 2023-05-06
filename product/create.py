@@ -1,6 +1,6 @@
 from mainImports import *
 def createProduct(productName, productDescription, productPrice, productCategoryId):
     with Session(autoflush=True, bind=engine) as db:
-        bread=Product(name=productName,description=productDescription, price=productPrice,category_id=productCategoryId)
-        db.add(bread)
+        tmp_product=Product(name=productName,description=productDescription, price=productPrice,category_id=productCategoryId)
+        db.add(tmp_product)
         db.commit()
