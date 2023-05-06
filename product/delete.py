@@ -4,3 +4,4 @@ def deleteProductById(rowId):
         record_obj = db.query(Product).filter(Product.id==rowId).first()
         db.delete(record_obj)
         db.commit()
+        return "was deleted succesfully"
