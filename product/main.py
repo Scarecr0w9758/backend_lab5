@@ -3,7 +3,8 @@ from read_one import getProductById
 from create import createProduct 
 from delete import deleteProductById 
 from update import updateProduct
-from flask import Flask, jsonify
+from flask import Flask, Request, jsonify
+import requests
 
 # Все методы (импортированные) настроены и готовы к работе
 # осталось:
@@ -11,20 +12,23 @@ from flask import Flask, jsonify
 # • Товары с пагинацией (по урлу в гет запросе)
 # • +++ Получение ОДНОГО товара по ID - сделал
 # •
-
-
-# getProductList()
-
-# deleteProductById(5)
-
-# updateProduct(3,'Jora2', "1just a regular product to improve uyour lfe",400,2)
-print(getProductList())
 app=Flask(__name__)
 
-# @app.route('/productList',methods=['GET'])
-# getProductList()
+# Наверное декораторы надо в отд. файлах юзать
+@app.route('/',methods=['GET'])
+def hello():
+    return "<h1>Main page of the productList</h1>"
+
+@app.route('/products',methods=['GET'])
+def getProducts():
+    return getProductList()
+
+
+# разобраться почему не работает делит и пут, а также добавить прокидку параметров элементов 
+@app.route('/products/<id>',methods=["GET" ,"POST"])
+def postupdateProduct(id):
+    return updateProduct(3,"dahell")
 
 
 if __name__ == '__main__':
-    pass
-    # app.run()
+    app.run()
