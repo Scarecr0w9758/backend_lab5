@@ -22,11 +22,6 @@ class Product(Base):
     category_id = Column(Integer)
   
 Base.metadata.create_all(bind=engine)
-# with Session(autoflush=True, bind=engine) as db:
-#     bread=Product(name="bread",description="empty desc", price=50,category_id=14)
-#     db.add(bread)
-#     db.commit()
-#     print(bread.id)
 
 # создаем таблицы
  
