@@ -4,6 +4,7 @@ from sqlalchemy.orm import DeclarativeBase,sessionmaker
 import sys
 sys.path.append('..')
 import dbconfig
+from datetime import datetime
 
 # строка подключения
 engine_name = f"mysql+pymysql://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}/{dbconfig.db_name}"
@@ -20,6 +21,8 @@ class Product(Base):
     description = Column(String)
     price = Column(Integer)
     category_id = Column(Integer)
+    created=Column(DateTime(), default=datetime.now),
+    modified=Column(DateTime(), default=datetime.now, onupdate=datetime.now)
   
 Base.metadata.create_all(bind=engine)
 
