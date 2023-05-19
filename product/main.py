@@ -25,7 +25,7 @@ def getProducts():
 
 @app.route('/products/create',methods=['POST'])
 def createNewProduct():
-    request_data=request.get_json()
+    request_data=request.get_json(force=True)
     return createProduct(id,
     productName = request_data["name"],
     productDescription = request_data["description"],
