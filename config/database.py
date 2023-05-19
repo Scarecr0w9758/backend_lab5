@@ -7,7 +7,8 @@ import dbconfig
 from datetime import datetime
 
 # строка подключения
-engine_name = f"mysql+pymysql://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}/{dbconfig.db_name}"
+engine_name = f"postgresql+psycopg2://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}:{dbconfig.port}/{dbconfig.db_name}"
+# engine_name = f"mysql+pymysql://{dbconfig.user}:{dbconfig.password}@{dbconfig.host}/{dbconfig.db_name}"
 # создаем движок SqlAlchemy
 engine = create_engine(engine_name)
 #создаем базовый класс для моделей
