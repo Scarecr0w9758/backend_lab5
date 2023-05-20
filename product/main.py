@@ -21,7 +21,11 @@ def hello():
 
 @app.route('/products',methods=['GET'])
 def getProducts():
-    return getProductList()
+    page=request.args.get('page',default=1)
+    perPage=request.args.get('perPage',default=50)
+    print(page)
+    print(perPage)
+    return getProductList(page,perPage)
 
 @app.route('/products/create',methods=['POST'])
 def createNewProduct():
@@ -36,10 +40,10 @@ def createNewProduct():
 # разобраться почему не работает делит и пут, а также добавить прокидку параметров элементов 
 @app.route('/products/<id>',methods=["GET" ,"DELETE", "PUT"])
 def changeOneProduct(id):
-    request_data=request.get_json(force=True)
     if request.method=="DELETE":
         return deleteProductById(id)    
     elif request.method=="PUT":
+        request_data=request.get_json(force=True)
         return updateProduct(id,
         productName = request_data["name"],
         productDescription = request_data["description"],
