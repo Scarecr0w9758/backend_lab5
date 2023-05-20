@@ -1,7 +1,6 @@
 from datetime import datetime
-from read_one import getProductById
 from mainImports import *
-
+from read_one import getProductById
 def updateProduct(productId, productName="", productDescription="", productPrice=0, productCategoryId=0):
     with Session(autoflush=True, bind=engine) as db:
         productQuery=db.query(Product).get(productId)

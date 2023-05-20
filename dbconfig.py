@@ -1,5 +1,5 @@
 host="127.0.0.1"
-user ="postgres"
-password="admin"
+user ="root"
+password=""
 db_name="products"
-port="5175"
+port=""
