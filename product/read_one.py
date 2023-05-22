@@ -1,5 +1,4 @@
 from mainImports import *
-# TODO: pagination
 def getProductById(productId):
     with Session(autoflush=True, bind=engine) as db:
         product_query=db.query(Product).get(productId)

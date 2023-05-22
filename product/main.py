@@ -7,14 +7,8 @@ from flask import Flask, Request, jsonify, request
 import requests
 
 # Все методы (импортированные) настроены и готовы к работе
-# осталось:
-# • Пагинация
-# • Товары с пагинацией (по урлу в гет запросе)
-# • +++ Получение ОДНОГО товара по ID - сделал
-# •
 app=Flask(__name__)
 
-# Наверное декораторы надо в отд. файлах юзать
 @app.route('/',methods=['GET'])
 def hello():
     return "<h1>Main page of the productList</h1>"
@@ -37,7 +31,6 @@ def createNewProduct():
     productCategoryId= request_data["category_id"])
 
 
-# разобраться почему не работает делит и пут, а также добавить прокидку параметров элементов 
 @app.route('/products/<id>',methods=["GET" ,"DELETE", "PUT"])
 def changeOneProduct(id):
     if request.method=="DELETE":
